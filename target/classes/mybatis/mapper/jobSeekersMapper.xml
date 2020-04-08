@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jcm.mapper.jobSeekersMapper">
+    <!--注册一个求职者用户-->
+    <insert id="addSeeker" parameterType="com.jcm.pojo.JobSeekers" useGeneratedKeys="true" keyProperty="jobseekersID">
+        insert into jobhunting.jobseekers (username, password) values (#{username},#{password})
+    </insert>
+
+    <!--求职者用户登录-->
+    <select id="querySeekers" resultType="string">
+        select jobseekerID from jobhunting.jobseekers where username=#{username} and password=#{password}
+    </select>
+
+    <!--求职者基本信息填写-->
+    <insert id="addJsInfo" parameterType="com.jcm.pojo.JSInfo">
+        insert into jobhunting.jsinfo(jsName, jsSex, jsBirth, jsEducation, jobseekerID) values (#{jsName},#{jsSex},#{jsBirth},#{jsEducation},#{jobSeekerID})
+    </insert>
+
+    <!--查询所有招聘信息-->
+    <select id="queryAllJobs" resultType="com.jcm.pojo.Jobs">
+        select * from jobhunting.jobs
+    </select>
+
+    <!--添加简历-->
+    <insert id="addResume" parameterType="com.jcm.pojo.Resume"  useGeneratedKeys="true" keyProperty="reID">
+        insert into jobhunting.resume (fullName, reSex, reBirth, jhStatus, startWorkTime, rsPhone, rsMalis, desiredPosition, salaryExpectation, cName, sInServiceTime, eInServiceTime, jType, jobContent, schoolName, reEducation, reMajor, sSchoolHours, eSchoolHours, reHobbies, selfEvaluation, jobseekerID)
+         values (#{fullName},#{reSex},#{reBirth},#{jhStatus},#{startWorkTime},#{rsPhone},#{rsMalis},#{desiredPosition},#{salaryExpectation},#{cName},#{sInServiceTime},#{eInServiceTime},#{jType},#{jobContent},#{schoolName},#{reEducation},#{reMajor},#{sSchoolHours},#{eSchoolHours},#{reHobbies},#{selfEvaluation},#{jobseekerID})
+    </insert>
+
+    <!--根据id查看简历-->
+    <select id="viewResume" resultType="com.jcm.pojo.Resume">
+        select * from jobhunting.resume where jobseekerID=#{id}
+    </select>
+
+    <!--修改简历信息-->
+    <update id="updateResume" parameterType="com.jcm.pojo.Resume">
+        update jobhunting.resume set fullName = #{fullName}, reSex = #{reSex},reBirth = #{reBirth}, jhStatus = #{jhStatus},
+          startWorkTime = #{startWorkTime}, rsPhone = #{rsPhone}, rsMalis = #{rsMalis}, desiredPosition = #{desiredPosition}, salaryExpectation = #{salaryExpectation},
+          cName = #{cName}, sInServiceTime = #{sInServiceTime}, eInServiceTime = #{eInServiceTime}, jType = #{jType}, jobContent = #{jobContent}, schoolName = #{schoolName},
+          reEducation = #{reEducation}, reMajor = #{reMajor}, sSchoolHours = #{sSchoolHours}, eSchoolHours = #{eSchoolHours}, reHobbies = #{reHobbies}, selfEvaluation = #{selfEvaluation}
+          where reID = #{reID}
+    </update>
+</mapper>

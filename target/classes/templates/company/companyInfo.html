@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>基本信息</title>
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+    <style>
+        html, body {width: 100%;height: 100%;overflow: hidden}
+        body {background: #009688;}
+        body:after {content:'';background-repeat:no-repeat;background-size:cover;-webkit-filter:blur(3px);-moz-filter:blur(3px);-o-filter:blur(3px);-ms-filter:blur(3px);filter:blur(3px);position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;}
+        .layui-container {width: 100%;height: 100%;overflow: auto}
+        .admin-login-background {width:500px;position:absolute;left:45%;top:20%;margin-left:-180px;margin-top:-100px;}
+        .logo-title {text-align:center;letter-spacing:2px;padding:14px 0;}
+        .logo-title h1 {color:#009688;font-size:25px;font-weight:bold;}
+        .login-form {background-color:#fff;border:1px solid #fff;border-radius:3px;padding:14px 20px;box-shadow:0 0 8px #eeeeee;}
+        .login-form .layui-form-item {position:relative;}
+        .login-form {padding-left:36px;}
+        .layui-form-item p{margin-bottom: 15px}
+    </style>
+</head>
+<body>
+
+<div class="layui-container">
+    <div class="admin-login-background">
+        <div class="layui-form login-form">
+            <form class="layui-form" th:action="@{/addCpInfo}" method="post">
+                <div class="layui-form-item logo-title">
+                    <h1>基本信息</h1>
+                </div>
+
+                <div class="layui-form-item">
+                    <p>公司名称</p>
+                    <input type="text" name="cpName" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                </div>
+                <div class="layui-form-item">
+                    <p>员工人数</p>
+                    <input type="text" name="cpPeople" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                </div>
+                <div class="layui-form-item">
+                    <p>公司性质</p>
+                    <select name="cpCharacter" lay-verify="required" lay-search="">
+                        <option value="">请选择</option>
+                        <option value="国有企业">国有企业</option>
+                        <option value="集体企业">集体企业</option>
+                        <option value="联营企业">联营企业</option>
+                        <option value="私营企业">私营企业</option>
+                        <option value="个体户">个体户</option>
+                        <option value="有限责任公司">有限责任公司</option>
+                        <option value="股份有限公司">股份有限公司</option>
+                    </select>
+                </div>
+                <div class="layui-form-item">
+                    <p>成立日期</p>
+                    <input type="text" name="cpBirth" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-item">
+                    <p>公司介绍</p>
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="cpIntroduction"></textarea>
+                </div>
+                <div class="layui-form-item">
+                    <input style="color: red;text-align: center" th:value="${ID2}" name="companyID" hidden>
+                </div>
+                <div class="layui-form-item">
+                    <button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="login">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/jquery-3.4.1.min.js}" charset="utf-8"></script>
+<script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+<script th:src="@{/js/jquery.particleground.min.js}" charset="utf-8"></script>
+<script>
+    layui.use(['form'], function () {
+        // 粒子线条背景
+        $(document).ready(function(){
+            $('.layui-container').particleground({
+                dotColor:'#5cbdaa',
+                lineColor:'#5cbdaa'
+            });
+        });
+    });
+    layui.use([ 'laydate'], function() {
+
+        var laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+    })
+</script>
+</body>
+</html>

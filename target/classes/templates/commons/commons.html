@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="layui-header layui-bg-green" th:fragment="topbar">
+    <div class="layui-logo" style="color: #2F4056;">求职招聘网</div>
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <ul class="layui-nav layui-layout-left " >
+        <li class="layui-nav-item"><a th:class="${activeUrl=='jobSeekerIndex.html'?'layui-this':''}" th:href="@{/tojobSeekerIndex}">首页</a></li>
+        <li class="layui-nav-item"><a th:class="${activeUrl=='joblist.html'?'layui-this':''}" th:href="@{/toJoblist}">职位</a></li>
+    </ul>
+    <ul class="layui-nav layui-layout-right">
+        <li class="layui-nav-item"><a th:href="@{'viewResume/'+${session.sID}}">简历</a></li>
+        <li class="layui-nav-item"><a th:href="@{/toResume}">欢迎您，[[${session.username}]]</a></li>
+        <li class="layui-nav-item"><a th:href="@{/loginOut}">退出</a></li>
+    </ul>
+</div>
+</html>
